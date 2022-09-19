@@ -1,0 +1,44 @@
+.tile_grid{
+    width: 40rem;
+    height: 40rem;
+    /* width: 100vw;
+    height: 100vh; */
+    display: grid;
+    grid-template-columns: repeat(10, 1fr);
+    background: blue;
+    margin-inline: auto;
+    gap: 4px
+    /* top: 16px; */
+}
+
+.tile{
+
+    background: orange;
+
+    width: 100%;
+    height: 100%;
+
+}
+
+.apple{
+    background: red;
+}
+
+.snake{
+    background: greenyellow;
+}
+
+.snake_head{
+    background: green;
+}
+
+.key{
+    height: 16rem;
+    width: 16rem;
+    border: 1rem solid hotpink;
+    border-radius: 5%;
+    color: aqua;
+    background: transparent;
+    padding: 1rem 1rem;
+    margin: 1rem 1rem;
+}

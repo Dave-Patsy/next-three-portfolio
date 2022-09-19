@@ -1,0 +1,17 @@
+.rps_button{
+    background: none;
+    border: 0;
+    width: 8rem;
+    height: 8rem;
+    color: white;
+}
+
+.rps_button:hover{
+    cursor:pointer;
+    scale: 2;
+}
+
+.rps_img{
+    
+    filter:invert(1)
+}

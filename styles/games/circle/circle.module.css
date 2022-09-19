@@ -1,0 +1,14 @@
+.circle{
+    position:static;
+    
+    background: linear-gradient(rgb(209, 110, 110,.3),green ) ;
+    
+    border-radius: 100px;
+    width: 200px;
+    height: 200px;
+    top: 50%;
+    left: 50%;
+    transform: rotateZ(45deg);
+    transition: transform .5s;
+    filter: blur(1px);
+}

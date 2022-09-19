@@ -1,0 +1,61 @@
+
+
+.card {
+    position: relative;
+    margin: none;
+    height: 64px;
+    width: 64px;
+    justify-self: center;
+}
+
+
+
+.card .image_wrapper {
+    width: 100%;
+    height: 100%;
+    display: block;
+}
+
+.card .front_wrapper {
+    transform: rotateY(90deg);
+    transition: all ease-in 0.2s;
+    position: absolute;
+}
+
+.flipped .front_wrapper {
+    transform: rotateY(0deg);
+    transition-delay: 0.2s;
+}
+
+.card .back_wrapper {
+    transition: all ease-in 0.2s;
+    transition-delay: 0s;
+    position: absolute;
+    border: 2px solid white;
+    border-radius: 6px;
+}
+
+.flipped .back_wrapper {
+    transform: rotateY(90deg);
+    transition-delay: 0s;
+}
+
+
+.rps-img {
+    filter: invert(100%);
+    padding: 0;
+}
+
+.rps-button {
+    margin: 1rem .5rem;
+    padding: 0;
+    width: 4rem;
+    height: 4rem;
+}
+
+.rps-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}

@@ -1,0 +1,26 @@
+.nav_container {
+    display: flex;
+    justify-content: space-between;
+    width: 100vw;
+    height: 2rem;
+    background: hotpink;
+    z-index: 1;
+}
+
+.nav_links_container {
+    display: flex;
+    justify-content: flex-end;
+    list-style: none;
+    margin: 0 1rem;
+}
+
+.nav_links {
+    display: flex;
+    margin: 1rem;
+    align-items: center;
+    justify-content: center;
+}
+
+.nav_link {
+    color: aliceblue;
+}
