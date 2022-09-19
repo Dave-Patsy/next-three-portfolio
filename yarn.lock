@@ -308,6 +308,11 @@
   dependencies:
     "@use-gesture/core" "10.2.20"
 
+"@use-it/interval@^1.0.0":
+  "integrity" "sha512-WQFcnSt/xM/mS8ZtJ0ut5lhPrl+V0HDPPcI/J0eUClsfiD+/r8A7IeW/pVcfpSVGWRmN3+WnjNteWuKyWs2WZg=="
+  "resolved" "https://registry.npmjs.org/@use-it/interval/-/interval-1.0.0.tgz"
+  "version" "1.0.0"
+
 "@webgpu/glslang@^0.0.15":
   "integrity" "sha512-niT+Prh3Aff8Uf1MVBVUsaNjFj9rJAKDXuoHIKiQbB+6IUP/3J3JIhBNyZ7lDhytvXxw6ppgnwKZdDJ08UMj4Q=="
   "resolved" "https://registry.npmjs.org/@webgpu/glslang/-/glslang-0.0.15.tgz"
@@ -1621,6 +1626,11 @@
     "loose-envify" "^1.1.0"
     "scheduler" "^0.23.0"
 
+"react-icons@^4.4.0":
+  "integrity" "sha512-fSbvHeVYo/B5/L4VhB7sBA1i2tS8MkT0Hb9t2H1AVPkwGfVHLJCqyr2Py9dKMxsyM63Eng1GkdZfbWj+Fmv8Rg=="
+  "resolved" "https://registry.npmjs.org/react-icons/-/react-icons-4.4.0.tgz"
+  "version" "4.4.0"
+
 "react-is@^16.13.1":
   "integrity" "sha512-24e6ynE2H+OKt4kqsOvNd8kBpV65zoxbA4BVsEOB3ARVWQki/DHzaUoC5KuON/BiccDaCCTZBuOcfZs70kR8bQ=="
   "resolved" "https://registry.npmjs.org/react-is/-/react-is-16.13.1.tgz"
@@ -1646,7 +1656,7 @@
   dependencies:
     "debounce" "^1.2.1"
 
-"react@^15.0.0 || ^16.0.0 || ^17.0.0 || ^18.0.0", "react@^16.8.0 || ^17.0.0 || ^18.0.0", "react@^17.0.2 || ^18.0.0-0", "react@^18.0.0", "react@^18.2.0", "react@>= 16.8.0", "react@>= 16.8.0 || 17.x.x || ^18.0.0-0", "react@>=16.13", "react@>=16.13.1", "react@>=16.8", "react@>=17.0", "react@>=18.0", "react@18.2.0":
+"react@*", "react@^15.0.0 || ^16.0.0 || ^17.0.0 || ^18.0.0", "react@^16.8.0 || ^17.0.0 || ^18.0.0", "react@^17.0.2 || ^18.0.0-0", "react@^18.0.0", "react@^18.2.0", "react@>= 16.8.0", "react@>= 16.8.0 || 17.x.x || ^18.0.0-0", "react@>=16.13", "react@>=16.13.1", "react@>=16.8", "react@>=17.0", "react@>=18.0", "react@18.2.0":
   "integrity" "sha512-/3IjMdb2L9QbBdWiW5e3P2/npwMBaU9mHCSCUzNln0ZCYbcfTsGbTJrU/kGemdH2IWmB2ioZ+zkxtmq6g09fGQ=="
   "resolved" "https://registry.npmjs.org/react/-/react-18.2.0.tgz"
   "version" "18.2.0"
