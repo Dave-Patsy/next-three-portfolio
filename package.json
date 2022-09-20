@@ -9,17 +9,22 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@react-spring/three": "^9.5.4",
     "@react-three/drei": "^9.31.1",
     "@react-three/fiber": "^8.7.4",
+    "@react-three/postprocessing": "^2.6.2",
     "@use-it/interval": "^1.0.0",
     "atoms": "^0.2.0",
     "gsap": "^3.11.1",
+    "jotai": "^1.8.4",
     "next": "12.3.0",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-icons": "^4.4.0",
+    "react-spring": "^9.5.4",
     "recoil": "^0.7.5",
-    "three": "^0.144.0"
+    "three": "^0.144.0",
+    "zustand": "^4.1.1"
   },
   "devDependencies": {
     "eslint": "8.23.1",
