@@ -156,13 +156,7 @@ const Location = () =>{
         </>
 
 
-        // <mesh>
-        //     <sphereGeometry args={[2,1024,1024]}/>
-        //     <meshStandardMaterial
-        //         map={locationTextuer}
-        //         side={BackSide}
-        //     />
-        // </mesh>
+
     )
 }
 

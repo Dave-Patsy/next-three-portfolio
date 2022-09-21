@@ -15,7 +15,6 @@ const Globe = () =>{
                 displacementBias={10}
             
             />
-            {/* <shaderMaterial/> */}
         </mesh>
     )
 }
