@@ -5,6 +5,8 @@ import Style from '../../styles/transitions/animationPage.module.css'
 import FinalScene from '../../components/animations/finalScene'
 import { Canvas } from '@react-three/fiber'
 import { OrbitControls, Stats } from '@react-three/drei'
+import { useEffect } from 'react'
+
 const AnimationPage = () =>{
     return(
         <div className={Style.ani_page}>
@@ -14,7 +16,6 @@ const AnimationPage = () =>{
             {/* <AnimationCanvas/> */}
             <Canvas>
                 <FinalScene/>   
-                <OrbitControls/>
                 <Stats/>
             </Canvas>
         </div>

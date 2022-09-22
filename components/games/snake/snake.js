@@ -29,7 +29,7 @@ const Snake = () => {
         }
         // console.log('this is temp: ', temp)
         let tempVal = temp[Math.floor(Math.random()* temp.length)]
-        // console.log('this is tempVal: ', tempVal)
+        console.log('this is tempVal: ', tempVal)
        
         return tempVal
     }
@@ -154,7 +154,7 @@ const Snake = () => {
             } else if(press.key === 'a'){
                 setDirection('left')
             }
-            // console.log(press.key)
+            console.log(press.key)
         }
 
         window.addEventListener('keydown',handleClick)
