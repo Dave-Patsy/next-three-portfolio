@@ -1,67 +1,16 @@
-import { useMemo, useRef, useEffect } from "react"
+import { useMemo, useRef, useEffect, useState } from "react"
 
 import {TextureLoader, BackSide, Scene, DoubleSide, WebGLRenderTarget, RGBAFormat, LinearFilter, Vector4 } from "three"
 import { useFrame, useLoader, useThree, createPortal } from "@react-three/fiber"
 import {OrbitControls, OrthographicCamera, PerspectiveCamera} from '@react-three/drei'
 
-import { coordinates } from './coordinates.js'
-
 import {useControls} from 'leva'
+import { locationsAtom } from "../../store.js"
+import {useAtom} from 'jotai'
+
 
 import "./FinalMaterial.js"
 
-const vertexShader = ` 
-    varying vec2 vUv;
-    varying vec3 vPosition;
-    void main()
-    {
-        gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
-        vUv = uv;
-        vPosition = position;
-    }
-`
-
-const fragmentShader = `
-    uniform float time;
-    uniform float progress;
-    uniform sampler2D scene360;
-    uniform sampler2D scenePlanet;
-    uniform vec4 resolution;
-    varying vec2 vUv;
-    varying vec3 vPosition;
-    float PI = 3.141592653589793238;
-
-    vec2 distort(vec2 olduv, float pr, float expo){
-        vec2 p0 = 2.0*olduv -1.0;
-        vec2 p1 = p0/(1.0 - pr*length(p0)*expo);
-        return (p1 + 1.0) * 0.5;
-    }
-
-    void main(){
-        float progress1 = smoothstep(0.75,1.0,progress);
-        vec2 uv1 = distort(vUv,-10.0 * pow(0.5 + 0.5*progress,32.0),progress*4.0);
-        vec2 uv2 = distort(vUv,-10.0*(1.0-progress),progress*4.0);
-        vec4 s360 = texture2D(scene360,uv2);
-        vec4 sPlanet = texture2D(scenePlanet,uv1);
-        float mixer = progress1;
-        vec4 finalTexture = mix(sPlanet, s360, mixer);
-        gl_FragColor = finalTexture;
-
-        // vec2 uv1 = distort(vUv, -10.0 * 0.5, 4.0);
-
-
-        // gl_FragColor = sPlanet;
-        // gl_FragColor = vec4(1.0, vUv, 1.0);
-        // Pattern 37
-        // vec2 wavedUv = vec2(
-        //     vUv.x,
-        //     vUv.y + sin(vUv.x * 30.0) * 0.1
-        // );
-        // float strength = 1.0 - step(0.01, abs(distance(wavedUv, vec2(0.5)) - 0.25));
-        // vUv *= time;
-        // gl_FragColor = vec4(vUv, strength, 1.0);
-    }
-`
 
 function calcPosFromLatLonRad(lat,lon){
     let radius = 13
@@ -97,6 +46,13 @@ const FinalScene = (props) =>{
     const texture2 = useRef()
 
     const finalTextureRef = useRef()
+
+    const [locations, updateLocations] = useAtom(locationsAtom)
+    locations.locations.forEach((x) =>{
+        console.log(x.texture)
+    })
+    console.log(locations.locations)
+    // const locations = useMemo(() => useAtom(locationsAtom),[])
     
     const {progress} = useControls('progress',{
         progress:{
@@ -107,7 +63,7 @@ const FinalScene = (props) =>{
         }
     })
     
-    console.log(progress)
+    // console.log(progress)
 
     var uniforms = {
         time: {value: 1},
@@ -156,9 +112,10 @@ const FinalScene = (props) =>{
 
     const groupRef = useRef()
 
+
     const colorMap = useLoader(TextureLoader,'/textures/world.200412.3x5400x2700.jpg')
     const heightMap = useLoader(TextureLoader,'/textures/srtm_ramp2.worldx294x196.jpg')
-    const locationTextuer = useLoader(TextureLoader,'/textures/locations/9dbceec6-e43d-40ed-a542-9e33782f3220_mucem.jpg')
+    const locationTextuer = useLoader(TextureLoader, locations.selected)
 
     useFrame(()=>{
         const delta = clock.getElapsedTime()
@@ -207,6 +164,16 @@ const FinalScene = (props) =>{
                     />
                 </mesh>
                 {
+                    locations.locations.map((loc, idx) =>{
+                        return(
+                            <mesh key={idx} position={calcPosFromLatLonRad(loc.coords.lat,loc.coords.lng)}>
+                                <sphereGeometry args={[.25,32,32]}/>
+                                <meshStandardMaterial color={'red'}/>
+                            </mesh>             
+                        )
+                    })
+                }
+                {/* {
                     coordinates.map((coor, idx) =>{
                         return(
                             <mesh key={idx} position={calcPosFromLatLonRad(coor.coords.lat,coor.coords.lng)}>
@@ -215,7 +182,7 @@ const FinalScene = (props) =>{
                             </mesh>             
                         )
                     })
-                }
+                } */}
             </group>
             
         </scene>
