@@ -1,6 +1,6 @@
 import { useMemo, useRef, useEffect, useState } from "react"
 
-import {TextureLoader, BackSide, Scene, DoubleSide, WebGLRenderTarget, RGBAFormat, LinearFilter, Vector4 } from "three"
+import {TextureLoader, BackSide, Scene, DoubleSide, WebGLRenderTarget, RGBAFormat, LinearFilter, Vector4, RepeatWrapping, InterpolateLinear } from "three"
 import { useFrame, useLoader, useThree, createPortal } from "@react-three/fiber"
 import {OrbitControls, OrthographicCamera, PerspectiveCamera} from '@react-three/drei'
 
@@ -10,6 +10,8 @@ import {useAtom} from 'jotai'
 
 
 import "./FinalMaterial.js"
+import { lerp } from "three/src/math/MathUtils"
+import { interpolate } from "gsap"
 
 
 function calcPosFromLatLonRad(lat,lon){
@@ -48,22 +50,18 @@ const FinalScene = (props) =>{
     const finalTextureRef = useRef()
 
     const [locations, updateLocations] = useAtom(locationsAtom)
-    locations.locations.forEach((x) =>{
-        console.log(x.texture)
-    })
-    console.log(locations.locations)
-    // const locations = useMemo(() => useAtom(locationsAtom),[])
     
-    const {progress} = useControls('progress',{
+    const [transitionTime, setTransitionTime] = useState(0)
+    const [progress, set]= useControls('progress', () => ({
         progress:{
             value: 0,
             min: 0,
             max: 1,
             step: 0.001,
+
         }
-    })
-    
-    // console.log(progress)
+    }))
+    console.log(transitionTime)
 
     var uniforms = {
         time: {value: 1},
@@ -72,7 +70,25 @@ const FinalScene = (props) =>{
         scenePlanet: {value: null}
     }
 
-    
+    useEffect(()=>{
+
+        if(transitionTime > 1){
+            setTransitionTime(prev => 1)
+            // clearInterval(interval)
+            return
+        }
+        if(transitionTime === 1){
+            return
+        }
+        const interval = setInterval(()=>{
+            if( interval)
+            setTransitionTime(prev => prev +1/60)
+        },1000/60)
+
+        return ()=>{
+            clearInterval(interval)
+        }
+    },[transitionTime])
 
     const texture4 = new WebGLRenderTarget(
         size.width,
@@ -93,20 +109,6 @@ const FinalScene = (props) =>{
         }
     )
 
-    const textureRef = useRef()
-    const texture6 = useMemo(()=>{
-        return(
-            new WebGLRenderTarget(
-                size.width,
-                size.height,
-                {
-                    format: RGBAFormat,
-                    minFilter: LinearFilter,
-                    magFilter: LinearFilter
-                }                
-            )
-        )
-    })
     const frustumSize = 1
     const aspect = size.width / size.height
 
@@ -116,10 +118,13 @@ const FinalScene = (props) =>{
     const colorMap = useLoader(TextureLoader,'/textures/world.200412.3x5400x2700.jpg')
     const heightMap = useLoader(TextureLoader,'/textures/srtm_ramp2.worldx294x196.jpg')
     const locationTextuer = useLoader(TextureLoader, locations.selected)
+    locationTextuer.wrapS = RepeatWrapping
+    locationTextuer.repeat.x = - 1;
 
     useFrame(()=>{
         const delta = clock.getElapsedTime()
         groupRef.current.rotation.y = delta * .1
+       
         
 
     },1)
@@ -132,7 +137,7 @@ const FinalScene = (props) =>{
         gl.render(scene3.current, cam3.current)  
     },2)
 
-    // useFrame(({ gl }) => void ((gl.autoClear = false), gl.clearDepth(), gl.render(scene1.current, cam1.current)), 100)
+
     return(
         <>
         {/* create 360 */}
@@ -205,7 +210,7 @@ const FinalScene = (props) =>{
                 <planeGeometry args={[1,1]}/>
                 <finalMaterial 
                     ref={finalTextureRef} 
-                    progress={progress} 
+                    progress={transitionTime} 
                     scene360={texture4.texture}
                     scenePlanet={texture5.texture}
                 />

@@ -24,7 +24,7 @@ export const locationsAtom = atom({
                 lat: 48.8566,
                 lng: 2.3522
             },
-            texture: '/textures/locations/eiffel tower grass.jpg'
+            texture: '/textures/locations/eiffel tower.jpg'
         },
         {
             title: 'New-York',
@@ -32,7 +32,7 @@ export const locationsAtom = atom({
                 lat: 40.7831,
                 lng: -73.9712
             },
-            texture: '/textures/locations/NYC.jpg'
+            texture: '/textures/locations/New York.jpg'
         },
         {
             title: 'Hawaii',
@@ -57,6 +57,22 @@ export const locationsAtom = atom({
                 lng: 12.4539
             },
             texture: '/textures/locations/St. Peter\'s Basilica.jpg'
+        },
+        {
+            title: 'Newport Pier',
+            coords:{
+                lat: 33.607855,
+                lng: -117.9286668
+            },
+            texture: '/textures/locations/Newport Pier.jpg'
+        },
+        {
+            title: 'Russia The Motherland Calls',
+            coords:{
+                lat: 48.7424,
+                lng: 44.5348
+            },
+            texture: '/textures/locations/The Motherland Calls.jpg'
         },
     ],
     selected: '/textures/locations/9dbceec6-e43d-40ed-a542-9e33782f3220_mucem.jpg'
