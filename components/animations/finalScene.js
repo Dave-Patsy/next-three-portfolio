@@ -8,10 +8,10 @@ import {useControls} from 'leva'
 import { locationsAtom } from "../../store.js"
 import {useAtom} from 'jotai'
 
+import Loc from "./loc.js"
+import Particles from "../portfolio/util/particles.jsx"
 
 import "./FinalMaterial.js"
-import { lerp } from "three/src/math/MathUtils"
-import { interpolate } from "gsap"
 
 
 function calcPosFromLatLonRad(lat,lon){
@@ -52,16 +52,16 @@ const FinalScene = (props) =>{
     const [locations, updateLocations] = useAtom(locationsAtom)
     
     const [transitionTime, setTransitionTime] = useState(0)
-    const [progress, set]= useControls('progress', () => ({
+
+    const [{progress},setProgess]= useControls( () =>({
         progress:{
             value: 0,
             min: 0,
             max: 1,
             step: 0.001,
-
-        }
+        },
     }))
-    console.log(transitionTime)
+    // console.log(transitionTime)
 
     var uniforms = {
         time: {value: 1},
@@ -109,7 +109,7 @@ const FinalScene = (props) =>{
         }
     )
 
-    const frustumSize = 1
+    const frustumSize = 3
     const aspect = size.width / size.height
 
     const groupRef = useRef()
@@ -124,6 +124,15 @@ const FinalScene = (props) =>{
     useFrame(()=>{
         const delta = clock.getElapsedTime()
         groupRef.current.rotation.y = delta * .1
+        if(false){
+
+            if(progress < 1){
+                setProgess({progress: progress += 1/60}) 
+            }
+            if (progress < 1){
+                setProgess({progress: 1}) 
+            }    
+        }
        
         
 
@@ -156,25 +165,28 @@ const FinalScene = (props) =>{
         
         {/* create planet */}
         <scene ref={scene2}>
-            <ambientLight intensity={15}/>
-            <PerspectiveCamera ref={cam2} makeDefault={false} position={[0, 0, 30]} fov={70} aspect={16/9} near={1} far={1000}/>
+            <Particles width={40} height={4} heightShift={10} depth={10}/>
+            <ambientLight intensity={6}/>
+            <pointLight position={[0,0,20]} intensity={2}/>
+            <PerspectiveCamera ref={cam2} makeDefault={false} position={[0, 0, 5]} fov={80} aspect={size.width/size.height} near={1} far={1000}/>
             <group ref={groupRef}>
                 <mesh>
-                    <sphereGeometry args={[3,32,32]} />
+                    <sphereGeometry args={[3,1024,1024]} />
                     <meshStandardMaterial 
                         map={colorMap}
-                        displacementMap={heightMap}
-                        displacementScale={.75}
-                        displacementBias={10}
                     />
                 </mesh>
                 {
                     locations.locations.map((loc, idx) =>{
                         return(
-                            <mesh key={idx} position={calcPosFromLatLonRad(loc.coords.lat,loc.coords.lng)}>
-                                <sphereGeometry args={[.25,32,32]}/>
-                                <meshStandardMaterial color={'red'}/>
-                            </mesh>             
+                            <Loc idx={idx} lat={loc.coords.lat} lng={loc.coords.lng}/>
+                            // <mesh 
+                            //     key={idx} 
+                            //     position={calcPosFromLatLonRad(loc.coords.lat,loc.coords.lng)}
+                            // >
+                            //     <sphereGeometry args={[.25,32,32]}/>
+                            //     <meshStandardMaterial color={'red'}/>
+                            // </mesh>             
                         )
                     })
                 }
@@ -194,23 +206,23 @@ const FinalScene = (props) =>{
         {/* <OrbitControls camera={cam2.current} canvas={scene2.current}/> */}
         {/* create final scene */}
         <scene ref={scene3}>
-            <pointLight position={[2,0,10]} intensity={3}/>
+            <pointLight position={[2,0,10]} intensity={10}/>
             <OrthographicCamera 
             ref={cam3} 
             makeDefault={false} 
-            position={[0,0,100]} 
+            position={[0,0,10]} 
             left={frustumSize/ -2} 
             right={frustumSize/2} 
             top={frustumSize/2} 
             bottom={frustumSize/-2}
             near={1}
-            far={1000} />
-
+            far={11} />
+            {/* <ambientLight intensity={20}/> */}
             <mesh>
-                <planeGeometry args={[1,1]}/>
+                <planeGeometry args={[3,3]}/>
                 <finalMaterial 
                     ref={finalTextureRef} 
-                    progress={transitionTime} 
+                    progress={progress} 
                     scene360={texture4.texture}
                     scenePlanet={texture5.texture}
                 />

@@ -1,9 +1,51 @@
 .ani_page{
-    width: 100vw;
-    height: 100vh;
+    width: 100%;
+    height: 100%;
+    background-color: black;
 }
 
 .bob > h1{
     padding: 0;
     margin: 0;
+}
+
+.loc_select{
+    display: flex;
+    justify-content: center;
+    background: 'red';
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    background: hotpink;;
+}
+
+.loc{
+    /* display: inline; */
+    z-index: 15;
+    padding-inline: 10px;
+}
+
+.loc:hover {
+    background-color: antiquewhite;
+    transition: background-color ease-in .1s;
+}
+
+
+.canvas_container{
+    position: absolute;
+    height: 100vh;
+    width: 100%;
+    top: 0;
+}
+
+.canvas{
+    background: black;
+
+}
+
+.nav_container{
+    position: relative;
+    width: 100%;
+    height: 4rem;
+    z-index: 25;
 }

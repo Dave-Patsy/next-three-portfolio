@@ -8,28 +8,34 @@ import { OrbitControls, Stats } from '@react-three/drei'
 import { useEffect } from 'react'
 import {useAtom} from 'jotai'
 import { locationsAtom } from '../../store'
+import PostShader from '../../components/animations/postShader'
 
 const AnimationPage = () =>{
 
     const [locations, updateLocations] = useAtom(locationsAtom)
 
+    useEffect(()=>{
+        console.log(locations.selected)
+    },[locations])
     return(
         <div className={Style.ani_page}>
-            <div className={Style.bob}>
-                <h1 className={Style.bob}>This will have cool animations</h1>
+            <div className={Style.nav_container}>
+                <ul className={Style.loc_select}>
+                    {
+                        locations.locations.map((loc, idx) =>{
+                            return <li className={Style.loc} key={idx} onClick={()=>updateLocations({...locations, selected:loc.texture})}>{loc.title}</li>
+                        })
+                    }
+                </ul>
             </div>
-            <ul>
-                {
-                    locations.locations.map((loc, idx) =>{
-                        return <li key={idx} onClick={()=>updateLocations({...locations, selected:loc.texture})}>{loc.title}</li>
-                    })
-                }
-            </ul>
-            {/* <AnimationCanvas/> */}
-            <Canvas>
-                <FinalScene/>   
-                <Stats/>
-            </Canvas>
+            <div className={Style.canvas_container}>
+
+                <Canvas className={Style.canvas} dpr={[1,2]}>
+                    <FinalScene/>   
+                    <Stats/>
+                    <PostShader/>
+                </Canvas>
+            </div>
         </div>
     )
 }
