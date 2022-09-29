@@ -179,7 +179,7 @@ const FinalScene = (props) =>{
                 {
                     locations.locations.map((loc, idx) =>{
                         return(
-                            <Loc idx={idx} lat={loc.coords.lat} lng={loc.coords.lng}/>
+                            <Loc key={idx} idx={idx} lat={loc.coords.lat} lng={loc.coords.lng}/>
                             // <mesh 
                             //     key={idx} 
                             //     position={calcPosFromLatLonRad(loc.coords.lat,loc.coords.lng)}
