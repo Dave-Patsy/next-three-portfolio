@@ -1,43 +1,46 @@
-import {Link} from 'next/link'
-import AnimationCanvas from '../../components/animations/animationScene'
-import Style from '../../styles/transitions/animationPage.module.css'
+import ExitBeforeEntering from "../../components/spring/transition/exitBeforeEnter"
+import ImageFade from "../../components/spring/transition/imageFade"
+import ListReordering from "../../components/spring/transition/listReordering"
+import Masonry from "../../components/spring/transition/masonry"
+import MultistageTransition from "../../components/spring/transition/multistageTransition"
+import NotificationMessage from "../../components/spring/transition/notificationMessage"
+import Style from '../../styles/transitions/spring/transitionsPage.module.css'
+import NotificationMessage2 from "../../components/spring/transition/notificationHub"
+import SimpleTransitions from "../../components/spring/transition/simpleTransition"
 
-import FinalScene from '../../components/animations/finalScene'
-import { Canvas } from '@react-three/fiber'
-import { OrbitControls, Stats } from '@react-three/drei'
-import { useEffect } from 'react'
-import {useAtom} from 'jotai'
-import { locationsAtom } from '../../store'
-import PostShader from '../../components/animations/postShader'
 
-const AnimationPage = () =>{
-
-    const [locations, updateLocations] = useAtom(locationsAtom)
-
-    useEffect(()=>{
-        console.log(locations.selected)
-    },[locations])
+const TransitionsPage = () => {
     return(
-        <div className={Style.ani_page}>
-            <div className={Style.nav_container}>
-                <ul className={Style.loc_select}>
-                    {
-                        locations.locations.map((loc, idx) =>{
-                            return <li className={Style.loc} key={idx} onClick={()=>updateLocations({...locations, selected:loc.texture})}>{loc.title}</li>
-                        })
-                    }
-                </ul>
+        <>
+            <div className={Style.header_container}>
+                <h1 className={Style.header}>Transitions</h1>
+                {/* <hr ></hr> */}
             </div>
-            <div className={Style.canvas_container}>
-
-                <Canvas className={Style.canvas} dpr={[1,2]}>
-                    <FinalScene/>   
-                    <Stats/>
-                    <PostShader/>
-                </Canvas>
+            <div className={Style.transition_wrapper}>
+                <div className={Style.transition_container}>
+                    <ListReordering/>
+                </div>
+                <div className={Style.transition_container}>
+                    <MultistageTransition/>
+                </div>
+                <div className={Style.transition_container}>
+                    <ImageFade/>
+                </div>
+                <div className={Style.transition_container}>
+                    <Masonry/>
+                </div>
+                <div className={Style.transition_container}>
+                    <ExitBeforeEntering/>
+                </div>
+                <div className={Style.transition_container}>
+                    <NotificationMessage2/>
+                </div>
+                <div className={Style.transition_container}>
+                    <SimpleTransitions/>
+                </div>
             </div>
-        </div>
+        </>
     )
 }
 
-export default AnimationPage
+export default TransitionsPage

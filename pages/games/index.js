@@ -12,6 +12,8 @@ const GamePage = () => {
 
     return(
         <>
+        <div className={Style.game_page_wrapper}>
+
             <h1>this will be my game page</h1>
             <ul>
                 <li><Link href={'/games/memory'}><a>to memory match</a></Link></li>
@@ -25,6 +27,7 @@ const GamePage = () => {
 
                 <Circle/>   
             </div>
+        </div>
             
             
         </>
