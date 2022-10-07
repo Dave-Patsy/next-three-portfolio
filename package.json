@@ -19,6 +19,7 @@
     "atoms": "^0.2.0",
     "gsap": "^3.11.1",
     "jotai": "^1.8.4",
+    "lerp": "^1.0.3",
     "leva": "^0.9.31",
     "lil-gui": "^0.17.0",
     "lodash.shuffle": "^4.2.0",
@@ -34,6 +35,7 @@
     "react-use-measure": "^2.1.1",
     "recoil": "^0.7.5",
     "three": "^0.144.0",
+    "use-asset": "^1.0.4",
     "valtio": "^1.7.0",
     "zustand": "^4.1.1"
   },
