@@ -1,0 +1,16 @@
+@import url("https://rsms.me/inter/inter.css");
+
+.ShoeWrapper{
+    width: 760px;
+    height: 100vh;
+    background: white;
+    font-family: "Inter var",
+    sans-serif;
+    display: flex;
+    justify-content: center;
+    position: relative;
+    margin-inline: auto;
+    padding: 0;
+    overflow: hidden;
+    outline: none;
+}
