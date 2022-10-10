@@ -9,6 +9,9 @@ import { Badge } from '@pmndrs/branding'
 import create from 'zustand'
 import { FontLoader } from 'three/examples/jsm/loaders/FontLoader.js'
 import { TextGeometry } from 'three/examples/jsm/geometries/TextGeometry.js'
+
+import Style from '../../styles/transitions/simpleScene/simpleScene.module.css'
+
 const useStore = create((set) => {
   new FontLoader().load('/font/font.blob', (font) => {
     const config = { font, size: 15, height: 2, curveSegments: 4, evelEnabled: false }
@@ -39,7 +42,7 @@ function Geometry({ r, position, ...props }) {
   })
   return (
     <group position={position} ref={ref}>
-      <a.mesh {...props} />
+      <a.mesh  {...props} receiveShadow={true} castShadow={true}  />
     </group>
   )
 }
@@ -70,8 +73,9 @@ export default function SimpleScene() {
     <>
       <Canvas
         concurrent
-        gl={{ powerPreference: 'high-performance', antialias: false, stencil: false, depth: false, alpha: false }}
+        gl={{ powerPreference: 'high-performance', antialias: false, stencil: false, depth: false, alpha: true }}
         pixelRatio={1.25}
+        // shadows={true}
         camera={{ position: [0, 0, 15], near: 5, far: 40 }}>
         <color attach="background" args={['white']} />
         <a.fog attach="fog" args={['white', 10, 40]} color={color.to([0, 0.2, 0.4, 0.7, 1], ['white', 'red', 'white', 'red', 'white'])} />
@@ -81,15 +85,14 @@ export default function SimpleScene() {
         <pointLight position={[-20, -20, -20]} intensity={5} />
         <Suspense fallback={null}>
           <Geometries />
-          {/* <ContactShadows rotation={[Math.PI / 2, 0, 0]} position={[0, -7, 0]} opacity={0.75} width={40} height={40} blur={1} far={9} /> */}
+          <ContactShadows position={[0, -7, 0]} opacity={1.75} scale={40} blur={.75} far={9} color="white"/>
           <EffectComposer multisampling={0}>
-            <SSAO samples={25} intensity={40} luminanceInfluence={0.5} radius={10} scale={0.5} bias={0.5} />
+            <SSAO samples={25} intensity={10} luminanceInfluence={0.5} radius={10} scale={0.5} bias={0.5} />
             <SMAA edgeDetectionMode={EdgeDetectionMode.DEPTH} />
           </EffectComposer>
         </Suspense>
         <Rig />
       </Canvas>
-      <Badge />
     </>
   )
 }
