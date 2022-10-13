@@ -9,8 +9,10 @@ import Diamonds from "../../components/diamond/diamonds/Diamonds"
 import Plane from "../../components/diamond/Plane"
 import { Block, useBlock } from "../../components/diamond/utils/blocks"
 import state from "../../components/diamond/utils/store"
+import {Helmet} from 'react-helmet'
 
-import Scroll from "../../components/portfolio/util/scroll"
+import Document, {Html as x, Body} from "next/document"
+
 // import "./styles.css"
 import Style from '../../styles/diamond/diamond.module.css'
 
@@ -97,16 +99,15 @@ function DiamondPage() {
   useEffect(() => void onScroll({ target: scrollArea.current }), [])
   return (
     <>
-    <div className={Style.conatiner}>
-
-      <Canvas linear dpr={[1, 2]} orthographic camera={{ zoom: state.zoom, position: [0, 0, 500] }}>
-        <Suspense fallback={<Html center className="loading" children="Loading..." />}>
-          <Content />
-          <Diamonds />
-          <Startup />
-        </Suspense>
-      </Canvas>
-    </div>
+      <div className={Style.conatiner}>
+        <Canvas linear dpr={[1, 2]} orthographic camera={{ zoom: state.zoom, position: [0, 0, 500] }}>
+          <Suspense fallback={<Html center className="loading" children="Loading..." />}>
+            <Content />
+            <Diamonds />
+            <Startup />
+          </Suspense>
+        </Canvas>
+      </div>
       <div className="scrollArea" ref={scrollArea} onScroll={onScroll}>
         {new Array(state.sections).fill().map((_, index) => (
           <div key={index} id={"0" + index} style={{ height: `${(state.pages / state.sections) * 100}vh` }} />

@@ -1,0 +1,19 @@
+.text {
+    font-weight: 600;
+    font-size: 8em;
+    will-change: opacity;
+    color:black;
+    /* color: #8360c3;
+
+    color: -webkit-linear-gradient(to right, #2ebf91, #8360c3);
+
+    color: linear-gradient(to right, #2ebf91, #8360c3); */
+
+}
+
+.container {
+    display: flex;
+    align-items: center;
+    height: 100%;
+    justify-content: center;
+}
