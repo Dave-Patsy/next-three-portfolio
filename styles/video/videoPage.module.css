@@ -1,0 +1,26 @@
+.videoPageWrapper{
+    display: block;
+    height: 100vh;
+    width: 100vw;
+    background-color: black;
+}
+
+.videoWrapper{
+    position: absolute;
+    top:0;
+    left:0;
+    z-index: 1000;
+    /* opacity: 0.5; */
+    /* border: 3px solid red; */
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%,-50%);
+    box-sizing: border-box;
+    width: calc(480px/1.60);
+    height: calc(820px/1.60);
+    pointer-events: none;
+}   
+
+.video {
+    width: 100%;
+}

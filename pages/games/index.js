@@ -20,6 +20,7 @@ const GamePage = () => {
                 <li><Link href={'/games/rps'}><a>to rock paper scissors</a></Link></li>
                 <li><Link href={'/games/spaceship'}><a>spaceship game</a></Link></li>
                 <li><Link href={'/games/snake'}><a>snake game</a></Link></li>
+                <li><Link href={'/games/ticTacToe'}><a>tic-tac-toe game</a></Link></li>
             </ul>
             <Link href={'/'}><a>Go to Homepage</a></Link>
             <div className={toggle? Style.test: Style.test2} onClick={handleClick}>hello</div>
