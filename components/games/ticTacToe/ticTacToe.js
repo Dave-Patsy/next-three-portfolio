@@ -108,6 +108,7 @@ const TickTacToe = () => {
                     <Square key={field} i={field} />
                     ))}
                 </div>
+                <div></div>
                 </div>
                 <End />
             </div>
